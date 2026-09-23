@@ -29,6 +29,12 @@
   <style>
     .skill-pills{display:flex;flex-wrap:wrap;gap:10px;}
     .skill-pill{border:1px solid color-mix(in srgb, var(--accent-color), transparent 60%);color:var(--accent-color);background:color-mix(in srgb, var(--accent-color), transparent 92%);padding:8px 16px;border-radius:30px;font-size:14px;font-weight:500;font-family:var(--heading-font);}
+    /* Portfolio: the theme only reveals title/caption/links on hover, which
+       never triggers on touch devices. Make the thumbnail itself directly
+       clickable (opens inline via glightbox) and keep the info panel always
+       visible, so tapping works the same as clicking on desktop. */
+    .portfolio .portfolio-item > a.glightbox{display:block;cursor:pointer;}
+    .portfolio .portfolio-item .portfolio-info{opacity:1;bottom:0;position:relative;left:auto;right:auto;}
   </style>
 
   <!-- =======================================================
@@ -342,7 +348,7 @@
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd9856b92a6f972.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Calendar Update Availability"></video>
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd9856b92a6f972.mp4" data-gallery="portfolio-gallery-ghlworks" data-type="video"><video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd9856b92a6f972.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Calendar Update Availability"></video></a>
               <div class="portfolio-info">
                 <h4>Calendar Update Availability</h4>
                 <p>GHL calendar automation</p>
@@ -351,7 +357,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399242db3709d.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Calendar Reservation"></video>
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399242db3709d.mp4" data-gallery="portfolio-gallery-ghlworks" data-type="video"><video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399242db3709d.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Calendar Reservation"></video></a>
               <div class="portfolio-info">
                 <h4>Calendar Reservation</h4>
                 <p>GHL calendar automation</p>
@@ -360,7 +366,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985868aa6f970.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Cancel Reservation"></video>
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985868aa6f970.mp4" data-gallery="portfolio-gallery-ghlworks" data-type="video"><video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985868aa6f970.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Cancel Reservation"></video></a>
               <div class="portfolio-info">
                 <h4>Cancel Reservation</h4>
                 <p>GHL calendar automation</p>
@@ -369,7 +375,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985f8f5a6f975.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Restaurant Voice AI Agent"></video>
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985f8f5a6f975.mp4" data-gallery="portfolio-gallery-ghlworks" data-type="video"><video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985f8f5a6f975.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Restaurant Voice AI Agent"></video></a>
               <div class="portfolio-info">
                 <h4>Restaurant Voice AI Agent</h4>
                 <p>Voice AI agent</p>
@@ -378,7 +384,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399493ab3709e.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Multi Calendar Booker"></video>
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399493ab3709e.mp4" data-gallery="portfolio-gallery-ghlworks" data-type="video"><video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399493ab3709e.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="Multi Calendar Booker"></video></a>
               <div class="portfolio-info">
                 <h4>Multi Calendar Booker</h4>
                 <p>GHL calendar automation</p>
@@ -387,7 +393,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <img src="assets/img/portfolio/ghlwork-dentist.png" class="img-fluid" alt="Lovable WebDesign Dentist">
+              <a class="glightbox" href="assets/img/portfolio/ghlwork-dentist.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-dentist.png" class="img-fluid" alt="Lovable WebDesign Dentist"></a>
               <div class="portfolio-info">
                 <h4>Lovable WebDesign Dentist</h4>
                 <p>Website &amp; funnel build</p>
@@ -397,7 +403,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <img src="assets/img/portfolio/ghlwork-cleaninglp1.png" class="img-fluid" alt="Cleaning Service LP v.1">
+              <a class="glightbox" href="assets/img/portfolio/ghlwork-cleaninglp1.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-cleaninglp1.png" class="img-fluid" alt="Cleaning Service LP v.1"></a>
               <div class="portfolio-info">
                 <h4>Cleaning Service LP v.1</h4>
                 <p>GHL landing page</p>
@@ -407,7 +413,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <img src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fad017c3a06e0b149c.png" class="img-fluid" alt="Cleaning Service LP v.2">
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fad017c3a06e0b149c.png" data-gallery="portfolio-gallery-ghlworks"><img src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fad017c3a06e0b149c.png" class="img-fluid" alt="Cleaning Service LP v.2"></a>
               <div class="portfolio-info">
                 <h4>Cleaning Service LP v.2</h4>
                 <p>GHL landing page</p>
@@ -417,7 +423,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985a7f4a6f976.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="SMS AI Google Review"></video>
+              <a class="glightbox" href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985a7f4a6f976.mp4" data-gallery="portfolio-gallery-ghlworks" data-type="video"><video poster="assets/img/portfolio/video-placeholder.jpg" src="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985a7f4a6f976.mp4" autoplay loop muted playsinline style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="SMS AI Google Review"></video></a>
               <div class="portfolio-info">
                 <h4>SMS AI Google Review</h4>
                 <p>SMS automation</p>
@@ -426,7 +432,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <img src="assets/img/portfolio/aiproj-cleanestimator.jpg" class="img-fluid" alt="Cleaning Cost Estimator">
+              <a class="glightbox" href="assets/img/portfolio/aiproj-cleanestimator.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-cleanestimator.jpg" class="img-fluid" alt="Cleaning Cost Estimator"></a>
               <div class="portfolio-info">
                 <h4>Cleaning Cost Estimator</h4>
                 <p>Instant, ZIP-code accurate cleaning cost estimates</p>
@@ -436,7 +442,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <img src="assets/img/portfolio/aiproj-achieverboard.jpg" class="img-fluid" alt="Task Management Board">
+              <a class="glightbox" href="assets/img/portfolio/aiproj-achieverboard.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-achieverboard.jpg" class="img-fluid" alt="Task Management Board"></a>
               <div class="portfolio-info">
                 <h4>Task Management Board</h4>
                 <p>Free Kanban board to organize tasks</p>
@@ -446,7 +452,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <img src="assets/img/portfolio/aiproj-homenexio.jpg" class="img-fluid" alt="Real Estate Education Hub">
+              <a class="glightbox" href="assets/img/portfolio/aiproj-homenexio.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-homenexio.jpg" class="img-fluid" alt="Real Estate Education Hub"></a>
               <div class="portfolio-info">
                 <h4>Real Estate Education Hub</h4>
                 <p>Free real estate investing &amp; licensing education</p>
@@ -456,7 +462,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <img src="assets/img/portfolio/aiproj-lessonreconciler.jpg" class="img-fluid" alt="Lesson Reconciler">
+              <a class="glightbox" href="assets/img/portfolio/aiproj-lessonreconciler.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-lessonreconciler.jpg" class="img-fluid" alt="Lesson Reconciler"></a>
               <div class="portfolio-info">
                 <h4>Lesson Reconciler</h4>
                 <p>AI-powered transcript-to-plan reconciliation</p>
@@ -466,7 +472,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-socialmedia">
-              <img src="assets/img/portfolio/social-1111-sale-day-campaign.png" class="img-fluid" alt="11.11 Sale Day Campaign">
+              <a class="glightbox" href="assets/img/portfolio/social-1111-sale-day-campaign.png" data-gallery="portfolio-gallery-socialmedia"><img src="assets/img/portfolio/social-1111-sale-day-campaign.png" class="img-fluid" alt="11.11 Sale Day Campaign"></a>
               <div class="portfolio-info">
                 <h4>11.11 Sale Day Campaign</h4>
                 <p>Messenger broadcast — 38K+ sent, 96% open rate</p>
@@ -475,7 +481,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-socialmedia">
-              <img src="assets/img/portfolio/social-1212-year-end-sale-campaign.png" class="img-fluid" alt="12.12 Year End Sale Campaign">
+              <a class="glightbox" href="assets/img/portfolio/social-1212-year-end-sale-campaign.png" data-gallery="portfolio-gallery-socialmedia"><img src="assets/img/portfolio/social-1212-year-end-sale-campaign.png" class="img-fluid" alt="12.12 Year End Sale Campaign"></a>
               <div class="portfolio-info">
                 <h4>12.12 Year End Sale Campaign</h4>
                 <p>Messenger broadcast — 35K+ sent, 93% open rate</p>
@@ -484,7 +490,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-socialmedia">
-              <img src="assets/img/portfolio/social-birthday-celebration-campaign.png" class="img-fluid" alt="7th Birthday Celebration Campaign">
+              <a class="glightbox" href="assets/img/portfolio/social-birthday-celebration-campaign.png" data-gallery="portfolio-gallery-socialmedia"><img src="assets/img/portfolio/social-birthday-celebration-campaign.png" class="img-fluid" alt="7th Birthday Celebration Campaign"></a>
               <div class="portfolio-info">
                 <h4>7th Birthday Celebration Campaign</h4>
                 <p>Messenger broadcast — 4.6K sent, 97% open rate</p>
@@ -493,7 +499,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-socialmedia">
-              <img src="assets/img/portfolio/social-messenger-subscribers.png" class="img-fluid" alt="Messenger Subscriber Growth">
+              <a class="glightbox" href="assets/img/portfolio/social-messenger-subscribers.png" data-gallery="portfolio-gallery-socialmedia"><img src="assets/img/portfolio/social-messenger-subscribers.png" class="img-fluid" alt="Messenger Subscriber Growth"></a>
               <div class="portfolio-info">
                 <h4>Messenger Subscriber Growth</h4>
                 <p>Grew Lazada's Messenger channel to 57K+ active contacts</p>
@@ -502,7 +508,7 @@
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-socialmedia">
-              <img src="assets/img/portfolio/social-messenger-campaign-list.png" class="img-fluid" alt="Messenger Campaign History">
+              <a class="glightbox" href="assets/img/portfolio/social-messenger-campaign-list.png" data-gallery="portfolio-gallery-socialmedia"><img src="assets/img/portfolio/social-messenger-campaign-list.png" class="img-fluid" alt="Messenger Campaign History"></a>
               <div class="portfolio-info">
                 <h4>Messenger Campaign History</h4>
                 <p>Broadcast history — consistent 90%+ delivery across campaigns</p>
