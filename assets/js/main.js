@@ -135,6 +135,39 @@
   });
 
   /**
+   * Portfolio: show a "Visit Live Site" button inside the open lightbox
+   * for slides whose trigger has a data-live-url, so visitors don't have
+   * to close the screenshot preview first to reach the live link.
+   */
+  function updateVisitButton(trigger) {
+    const btn = document.querySelector('.gvisit');
+    if (!btn) return;
+    const url = trigger && trigger.getAttribute ? trigger.getAttribute('data-live-url') : null;
+    if (url) {
+      btn.href = url;
+      btn.style.display = 'flex';
+    } else {
+      btn.removeAttribute('href');
+      btn.style.display = 'none';
+    }
+  }
+  glightbox.on('open', function () {
+    const container = document.querySelector('.gcontainer');
+    if (container && !container.querySelector('.gvisit')) {
+      const btn = document.createElement('a');
+      btn.className = 'gbtn gvisit';
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+      btn.setAttribute('aria-label', 'Visit Live Site');
+      btn.innerHTML = '<i class="bi bi-box-arrow-up-right"></i>';
+      container.appendChild(btn);
+    }
+  });
+  glightbox.on('slide_changed', function (data) {
+    updateVisitButton(data.current && data.current.trigger);
+  });
+
+  /**
    * Init isotope layout and filters
    */
   document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {

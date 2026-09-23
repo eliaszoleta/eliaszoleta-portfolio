@@ -35,6 +35,25 @@
        visible, so tapping works the same as clicking on desktop. */
     .portfolio .portfolio-item > a.glightbox{display:block;cursor:pointer;}
     .portfolio .portfolio-item .portfolio-info{opacity:1;bottom:0;position:relative;left:auto;right:auto;}
+    /* "Visit Live Site" button injected into the open lightbox (see
+       main.js) for portfolio items that have a live URL, so you don't
+       have to close the screenshot preview first to reach the link. */
+    .gvisit{
+      display:none;
+      position:absolute;
+      top:15px;
+      right:55px;
+      width:35px;
+      height:35px;
+      z-index:99999;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      opacity:.7;
+      transition:opacity .3s;
+    }
+    .gvisit:hover{opacity:1;color:#fff;}
+    .gvisit i{font-size:20px;line-height:1;}
   </style>
 
   <!-- =======================================================
@@ -351,7 +370,6 @@
               <div class="portfolio-info">
                 <h4>Calendar Update Availability</h4>
                 <p>GHL calendar automation</p>
-                <a href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd9856b92a6f972.mp4" title="Calendar Update Availability" data-gallery="portfolio-gallery-ghlworks" data-type="video" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -360,7 +378,6 @@
               <div class="portfolio-info">
                 <h4>Calendar Reservation</h4>
                 <p>GHL calendar automation</p>
-                <a href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399242db3709d.mp4" title="Calendar Reservation" data-gallery="portfolio-gallery-ghlworks" data-type="video" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -369,7 +386,6 @@
               <div class="portfolio-info">
                 <h4>Cancel Reservation</h4>
                 <p>GHL calendar automation</p>
-                <a href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985868aa6f970.mp4" title="Cancel Reservation" data-gallery="portfolio-gallery-ghlworks" data-type="video" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -378,7 +394,6 @@
               <div class="portfolio-info">
                 <h4>Restaurant Voice AI Agent</h4>
                 <p>Voice AI agent</p>
-                <a href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985f8f5a6f975.mp4" title="Restaurant Voice AI Agent" data-gallery="portfolio-gallery-ghlworks" data-type="video" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -387,36 +402,32 @@
               <div class="portfolio-info">
                 <h4>Multi Calendar Booker</h4>
                 <p>GHL calendar automation</p>
-                <a href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa5f9399493ab3709e.mp4" title="Multi Calendar Booker" data-gallery="portfolio-gallery-ghlworks" data-type="video" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <a class="glightbox" href="assets/img/portfolio/ghlwork-dentist.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-dentist.png" class="img-fluid" alt="Lovable WebDesign Dentist"></a>
+              <a class="glightbox" data-live-url="https://pdentres.eliaszoleta.com/" href="assets/img/portfolio/ghlwork-dentist.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-dentist.png" class="img-fluid" alt="Lovable WebDesign Dentist"></a>
               <div class="portfolio-info">
                 <h4>Lovable WebDesign Dentist</h4>
                 <p>Website &amp; funnel build</p>
-                <a href="assets/img/portfolio/ghlwork-dentist.png" title="Lovable WebDesign Dentist" data-gallery="portfolio-gallery-ghlworks" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://pdentres.eliaszoleta.com/" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <a class="glightbox" href="assets/img/portfolio/ghlwork-cleaninglp1.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-cleaninglp1.png" class="img-fluid" alt="Cleaning Service LP v.1"></a>
+              <a class="glightbox" data-live-url="https://restore.eliaszoleta.com/" href="assets/img/portfolio/ghlwork-cleaninglp1.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-cleaninglp1.png" class="img-fluid" alt="Cleaning Service LP v.1"></a>
               <div class="portfolio-info">
                 <h4>Cleaning Service LP v.1</h4>
                 <p>GHL landing page</p>
-                <a href="assets/img/portfolio/ghlwork-cleaninglp1.png" title="Cleaning Service LP v.1" data-gallery="portfolio-gallery-ghlworks" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://restore.eliaszoleta.com/" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ghlworks">
-              <a class="glightbox" href="assets/img/portfolio/ghlwork-cleaninglp2.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-cleaninglp2.png" class="img-fluid" alt="Immaculate Restoration Landing Page"></a>
+              <a class="glightbox" data-live-url="https://restore.eliaszoleta.com/" href="assets/img/portfolio/ghlwork-cleaninglp2.png" data-gallery="portfolio-gallery-ghlworks"><img src="assets/img/portfolio/ghlwork-cleaninglp2.png" class="img-fluid" alt="Immaculate Restoration Landing Page"></a>
               <div class="portfolio-info">
                 <h4>Immaculate Restoration Landing Page</h4>
                 <p>Full restoration &amp; cleaning site redesign</p>
-                <a href="assets/img/portfolio/ghlwork-cleaninglp2.png" title="Immaculate Restoration Landing Page" data-gallery="portfolio-gallery-ghlworks" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://restore.eliaszoleta.com/" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
@@ -426,46 +437,41 @@
               <div class="portfolio-info">
                 <h4>SMS AI Google Review</h4>
                 <p>SMS automation</p>
-                <a href="https://storage.googleapis.com/msgsndr/p9KUsoKcgbHyKBcb5DJu/media/698727fa2dd985a7f4a6f976.mp4" title="SMS AI Google Review" data-gallery="portfolio-gallery-ghlworks" data-type="video" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <a class="glightbox" href="assets/img/portfolio/aiproj-cleanestimator.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-cleanestimator.jpg" class="img-fluid" alt="Cleaning Cost Estimator"></a>
+              <a class="glightbox" data-live-url="https://www.cleanestimator.com" href="assets/img/portfolio/aiproj-cleanestimator.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-cleanestimator.jpg" class="img-fluid" alt="Cleaning Cost Estimator"></a>
               <div class="portfolio-info">
                 <h4>Cleaning Cost Estimator</h4>
                 <p>Instant, ZIP-code accurate cleaning cost estimates</p>
-                <a href="assets/img/portfolio/aiproj-cleanestimator.jpg" title="Cleaning Cost Estimator" data-gallery="portfolio-gallery-aiprojects" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://www.cleanestimator.com" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <a class="glightbox" href="assets/img/portfolio/aiproj-achieverboard.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-achieverboard.jpg" class="img-fluid" alt="Task Management Board"></a>
+              <a class="glightbox" data-live-url="https://www.achieverboard.com" href="assets/img/portfolio/aiproj-achieverboard.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-achieverboard.jpg" class="img-fluid" alt="Task Management Board"></a>
               <div class="portfolio-info">
                 <h4>Task Management Board</h4>
                 <p>Free Kanban board to organize tasks</p>
-                <a href="assets/img/portfolio/aiproj-achieverboard.jpg" title="Task Management Board" data-gallery="portfolio-gallery-aiprojects" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://www.achieverboard.com" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <a class="glightbox" href="assets/img/portfolio/aiproj-homenexio.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-homenexio.jpg" class="img-fluid" alt="Real Estate Education Hub"></a>
+              <a class="glightbox" data-live-url="https://homenexio.com" href="assets/img/portfolio/aiproj-homenexio.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-homenexio.jpg" class="img-fluid" alt="Real Estate Education Hub"></a>
               <div class="portfolio-info">
                 <h4>Real Estate Education Hub</h4>
                 <p>Free real estate investing &amp; licensing education</p>
-                <a href="assets/img/portfolio/aiproj-homenexio.jpg" title="Real Estate Education Hub" data-gallery="portfolio-gallery-aiprojects" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://homenexio.com" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-aiprojects">
-              <a class="glightbox" href="assets/img/portfolio/aiproj-lessonreconciler.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-lessonreconciler.jpg" class="img-fluid" alt="Lesson Reconciler"></a>
+              <a class="glightbox" data-live-url="https://claude.ai/artifact/3PgPnmdiddAFDV5LX25NtW" href="assets/img/portfolio/aiproj-lessonreconciler.jpg" data-gallery="portfolio-gallery-aiprojects"><img src="assets/img/portfolio/aiproj-lessonreconciler.jpg" class="img-fluid" alt="Lesson Reconciler"></a>
               <div class="portfolio-info">
                 <h4>Lesson Reconciler</h4>
                 <p>AI-powered transcript-to-plan reconciliation</p>
-                <a href="assets/img/portfolio/aiproj-lessonreconciler.jpg" title="Lesson Reconciler" data-gallery="portfolio-gallery-aiprojects" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="https://claude.ai/artifact/3PgPnmdiddAFDV5LX25NtW" title="Visit Live Site" target="_blank" rel="noopener noreferrer" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
@@ -475,7 +481,6 @@
               <div class="portfolio-info">
                 <h4>11.11 Sale Day Campaign</h4>
                 <p>Messenger broadcast — 38K+ sent, 96% open rate</p>
-                <a href="assets/img/portfolio/social-1111-sale-day-campaign.png" title="11.11 Sale Day Campaign" data-gallery="portfolio-gallery-socialmedia" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -484,7 +489,6 @@
               <div class="portfolio-info">
                 <h4>12.12 Year End Sale Campaign</h4>
                 <p>Messenger broadcast — 35K+ sent, 93% open rate</p>
-                <a href="assets/img/portfolio/social-1212-year-end-sale-campaign.png" title="12.12 Year End Sale Campaign" data-gallery="portfolio-gallery-socialmedia" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -493,7 +497,6 @@
               <div class="portfolio-info">
                 <h4>7th Birthday Celebration Campaign</h4>
                 <p>Messenger broadcast — 4.6K sent, 97% open rate</p>
-                <a href="assets/img/portfolio/social-birthday-celebration-campaign.png" title="7th Birthday Celebration Campaign" data-gallery="portfolio-gallery-socialmedia" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -502,7 +505,6 @@
               <div class="portfolio-info">
                 <h4>Messenger Subscriber Growth</h4>
                 <p>Grew Lazada's Messenger channel to 57K+ active contacts</p>
-                <a href="assets/img/portfolio/social-messenger-subscribers.png" title="Messenger Subscriber Growth" data-gallery="portfolio-gallery-socialmedia" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -511,7 +513,6 @@
               <div class="portfolio-info">
                 <h4>Messenger Campaign History</h4>
                 <p>Broadcast history — consistent 90%+ delivery across campaigns</p>
-                <a href="assets/img/portfolio/social-messenger-campaign-list.png" title="Messenger Campaign History" data-gallery="portfolio-gallery-socialmedia" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -520,7 +521,6 @@
               <div class="portfolio-info">
                 <h4>Facebook Ad — White Glove Cleaning</h4>
                 <p>Facebook lead ad creative</p>
-                <a href="assets/img/portfolio/social-fb-ad-whiteglove-creative.png" title="Facebook Ad — White Glove Cleaning" data-gallery="portfolio-gallery-fbad" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -529,7 +529,6 @@
               <div class="portfolio-info">
                 <h4>Facebook Lead Form — Service Type</h4>
                 <p>Lead form step 1 — service selection</p>
-                <a href="assets/img/portfolio/social-fb-ad-whiteglove-form-step1.png" title="Facebook Lead Form — Service Type" data-gallery="portfolio-gallery-fbad" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
@@ -538,7 +537,6 @@
               <div class="portfolio-info">
                 <h4>Facebook Lead Form — Contact Info</h4>
                 <p>Lead form step 2 — contact details capture</p>
-                <a href="assets/img/portfolio/social-fb-ad-whiteglove-form-step2.png" title="Facebook Lead Form — Contact Info" data-gallery="portfolio-gallery-fbad" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
               </div>
             </div><!-- End Portfolio Item -->
 
