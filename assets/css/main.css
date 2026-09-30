@@ -909,9 +909,18 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
-.services-expertise-note {
+.services-role-title {
   max-width: 820px;
   margin: 40px auto 0;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.services-expertise-note {
+  max-width: 820px;
+  margin: 12px auto 0;
   text-align: center;
   color: color-mix(in srgb, var(--default-color), transparent 25%);
   font-size: 15px;
