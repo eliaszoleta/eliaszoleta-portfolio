@@ -1,83 +1,67 @@
-/**
-* Template Name: MyResume
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-(function() {
+(function () {
   "use strict";
-
-  /**
-   * Header toggle
-   */
-  const headerToggleBtn = document.querySelector('.header-toggle');
-
-  function headerToggle() {
-    document.querySelector('#header').classList.toggle('header-show');
-    headerToggleBtn.classList.toggle('bi-list');
-    headerToggleBtn.classList.toggle('bi-x');
-  }
-  headerToggleBtn.addEventListener('click', headerToggle);
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.header-show')) {
-        headerToggle();
-      }
-    });
-
-  });
-
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
 
   /**
    * Preloader
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
+    window.addEventListener('load', () => preloader.remove());
   }
 
   /**
-   * Scroll top button
+   * Header: scrolled state + mobile menu toggle
    */
-  let scrollTop = document.querySelector('.scroll-top');
+  const header = document.querySelector('#header');
+  const headerToggleBtn = document.querySelector('.header-toggle');
 
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+  function toggleHeaderScrolled() {
+    if (window.scrollY > 40) {
+      header.classList.add('header-scrolled');
+    } else {
+      header.classList.remove('header-scrolled');
     }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  window.addEventListener('load', toggleHeaderScrolled);
+  document.addEventListener('scroll', toggleHeaderScrolled);
+
+  if (headerToggleBtn) {
+    headerToggleBtn.addEventListener('click', () => {
+      header.classList.toggle('menu-open');
+    });
+  }
+
+  document.querySelectorAll('#navmenu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      header.classList.remove('menu-open');
     });
   });
 
+  /**
+   * Scroll-top button
+   */
+  const scrollTop = document.querySelector('.scroll-top');
+
+  function toggleScrollTop() {
+    if (!scrollTop) return;
+    window.scrollY > 300 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+  }
+  if (scrollTop) {
+    scrollTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
-   * Animation on scroll function and init
+   * AOS init. AOS computes each element's scroll-trigger offset on window
+   * 'load', but the Portfolio section's Isotope masonry layout (and any
+   * slow-loading images) settle asynchronously right around that same
+   * moment, changing page height afterward -- which can leave everything
+   * below Portfolio permanently stuck at opacity:0. Re-running AOS's
+   * calculations once things have visually settled fixes it.
    */
   function aosInit() {
     AOS.init({
@@ -88,16 +72,20 @@
     });
   }
   window.addEventListener('load', aosInit);
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      if (window.AOS) AOS.refreshHard();
+    }, 700);
+  });
 
   /**
-   * Init typed.js
+   * Typed.js rotating role text
    */
   const selectTyped = document.querySelector('.typed');
   if (selectTyped) {
-    let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
+    let typedStrings = selectTyped.getAttribute('data-typed-items').split(',');
     new Typed('.typed', {
-      strings: typed_strings,
+      strings: typedStrings,
       loop: true,
       typeSpeed: 100,
       backSpeed: 50,
@@ -106,39 +94,12 @@
   }
 
   /**
-   * Initiate Pure Counter
-   */
-  new PureCounter();
-
-  /**
-   * Animate the skills items on reveal
-   */
-  let skillsAnimation = document.querySelectorAll('.skills-animation');
-  skillsAnimation.forEach((item) => {
-    new Waypoint({
-      element: item,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = item.querySelectorAll('.progress .progress-bar');
-        progress.forEach(el => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%';
-        });
-      }
-    });
-  });
-
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
-  /**
-   * Portfolio: show a "Visit Live Site" button inside the open lightbox
+   * GLightbox + "Visit Live Site" button injected into the open lightbox
    * for slides whose trigger has a data-live-url, so visitors don't have
    * to close the screenshot preview first to reach the live link.
    */
+  const glightbox = GLightbox({ selector: '.glightbox' });
+
   function updateVisitButton(trigger) {
     const btn = document.querySelector('.gvisit');
     if (!btn) return;
@@ -168,15 +129,15 @@
   });
 
   /**
-   * Init isotope layout and filters
+   * Isotope portfolio filtering
    */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+  document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
     let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
     let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
     let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
 
     let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
+    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function () {
       initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
         itemSelector: '.isotope-item',
         layoutMode: layout,
@@ -185,78 +146,90 @@
       });
     });
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
+    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function (filterEl) {
+      filterEl.addEventListener('click', function () {
         isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
         this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
+        initIsotope.arrange({ filter: this.getAttribute('data-filter') });
+        if (typeof aosInit === 'function') aosInit();
       }, false);
     });
-
   });
 
   /**
-   * Init swiper sliders
+   * Smooth-scroll correction for URLs containing hash links on load
    */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
-
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
-    });
-  }
-
-  window.addEventListener("load", initSwiper);
-
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function(e) {
-    if (window.location.hash) {
-      if (document.querySelector(window.location.hash)) {
-        setTimeout(() => {
-          let section = document.querySelector(window.location.hash);
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
+  window.addEventListener('load', function () {
+    if (window.location.hash && document.querySelector(window.location.hash)) {
+      setTimeout(() => {
+        let section = document.querySelector(window.location.hash);
+        window.scrollTo({ top: section.offsetTop - 76, behavior: 'smooth' });
+      }, 100);
     }
   });
 
   /**
-   * Navmenu Scrollspy
+   * Navmenu scrollspy
    */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
+  let navLinks = document.querySelectorAll('#navmenu a[href^="#"]');
 
-  function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
+  function navScrollspy() {
+    navLinks.forEach((link) => {
+      let section = document.querySelector(link.getAttribute('href'));
       if (!section) return;
       let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
+      if (position >= section.offsetTop && position <= section.offsetTop + section.offsetHeight) {
+        navLinks.forEach((l) => l.classList.remove('active'));
+        link.classList.add('active');
       }
-    })
+    });
   }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
+  window.addEventListener('load', navScrollspy);
+  document.addEventListener('scroll', navScrollspy);
+
+  /**
+   * Web3Forms contact form submission
+   */
+  const form = document.getElementById('web3formsContactForm');
+  if (form) {
+    const loadingEl = form.querySelector('.loading');
+    const errorEl = form.querySelector('.error-message');
+    const sentEl = form.querySelector('.sent-message');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (form.botcheck && form.botcheck.checked) return;
+      loadingEl.style.display = 'block';
+      errorEl.style.display = 'none';
+      sentEl.style.display = 'none';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: '7c3c7b35-20ba-422e-bd9c-e40ecf3fac34',
+            subject: 'New message from your portfolio site',
+            from_name: 'Portfolio Contact Form',
+            name: form.name.value,
+            email: form.email.value,
+            message: form.message.value
+          })
+        });
+        const json = await res.json();
+        loadingEl.style.display = 'none';
+        if (json.success) {
+          sentEl.style.display = 'block';
+          form.reset();
+        } else {
+          errorEl.textContent = json.message || 'Something went wrong. Please try again.';
+          errorEl.style.display = 'block';
+        }
+      } catch (err) {
+        loadingEl.style.display = 'none';
+        errorEl.textContent = 'Network error. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    });
+  }
 
 })();
