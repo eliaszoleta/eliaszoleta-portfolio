@@ -565,7 +565,7 @@ ul {
 .hero-visual {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   height: 560px;
 }
@@ -591,22 +591,27 @@ ul {
 .hero-photo-frame {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  width: 320px;
+  height: 320px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--border-strong);
+  box-shadow: 0 0 0 10px rgba(43, 95, 224, 0.1), 0 30px 60px rgba(0, 0, 0, 0.5);
 }
 
 .hero-photo-frame img {
-  max-height: 100%;
-  width: auto;
-  margin: 0 auto;
-  object-fit: contain;
-  -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5));
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+@media (max-width: 992px) {
+  .hero-photo-frame {
+    width: 240px;
+    height: 240px;
+  }
 }
 
 .hero-float-card {
