@@ -1321,6 +1321,35 @@ ul {
   transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+  .skill-pills {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .skill-pill {
+    display: list-item;
+    list-style: disc;
+    list-style-position: inside;
+    margin-left: 4px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    text-align: left;
+  }
+
+  .skill-pill:hover {
+    background: none;
+    transform: none;
+  }
+
+  .skill-group-title {
+    text-align: left;
+  }
+}
+
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
