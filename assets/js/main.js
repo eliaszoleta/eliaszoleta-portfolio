@@ -57,11 +57,10 @@
 
   /**
    * AOS init. AOS computes each element's scroll-trigger offset on window
-   * 'load', but the Portfolio section's Isotope masonry layout (and any
-   * slow-loading images) settle asynchronously right around that same
-   * moment, changing page height afterward -- which can leave everything
-   * below Portfolio permanently stuck at opacity:0. Re-running AOS's
-   * calculations once things have visually settled fixes it.
+   * 'load', but slow-loading images can settle asynchronously right
+   * around that same moment, changing page height afterward -- which can
+   * leave everything below permanently stuck at opacity:0. Re-running
+   * AOS's calculations once things have visually settled fixes it.
    */
   function aosInit() {
     AOS.init({
@@ -94,67 +93,201 @@
   }
 
   /**
-   * GLightbox + "Visit Live Site" button injected into the open lightbox
-   * for slides whose trigger has a data-live-url, so visitors don't have
-   * to close the screenshot preview first to reach the live link.
+   * Portfolio: fixed-frame sliding gallery, one item at a time, auto-
+   * advancing per category -- instead of a scrolling grid of
+   * differently-sized cards. Category tabs swap which subset of
+   * PORTFOLIO_ITEMS the gallery cycles through.
    */
-  const glightbox = GLightbox({ selector: '.glightbox' });
+  (function portfolioGallery() {
+    const root = document.getElementById('portfolioGallery');
+    if (!root || !window.PORTFOLIO_ITEMS) return;
 
-  function updateVisitButton(trigger) {
-    const btn = document.querySelector('.gvisit');
-    if (!btn) return;
-    const url = trigger && trigger.getAttribute ? trigger.getAttribute('data-live-url') : null;
-    if (url) {
-      btn.href = url;
-      btn.style.display = 'flex';
-    } else {
-      btn.removeAttribute('href');
-      btn.style.display = 'none';
+    const CATEGORY_LABEL = {};
+    (window.PORTFOLIO_CATEGORIES || []).forEach((c) => { CATEGORY_LABEL[c.key] = c.label; });
+
+    const filtersEl = document.getElementById('portfolioFilters');
+    const stageEl = document.getElementById('galleryStage');
+    const frameEl = document.getElementById('galleryFrame');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    const counterEl = document.getElementById('galleryCounter');
+    const thumbsEl = document.getElementById('galleryThumbs');
+    const dotsEl = document.getElementById('galleryDots');
+    const categoryEl = document.getElementById('galleryCategory');
+    const titleEl = document.getElementById('galleryTitle');
+    const descEl = document.getElementById('galleryDesc');
+    const ctaEl = document.getElementById('galleryCta');
+
+    let category = 'all';
+    let index = 0;
+    let timer = null;
+    let paused = false;
+
+    const AUTO_ADVANCE_MS = 4500;
+
+    function filteredItems() {
+      return category === 'all'
+        ? window.PORTFOLIO_ITEMS
+        : window.PORTFOLIO_ITEMS.filter((it) => it.category === category);
     }
-  }
-  glightbox.on('open', function () {
-    const container = document.querySelector('.gcontainer');
-    if (container && !container.querySelector('.gvisit')) {
-      const btn = document.createElement('a');
-      btn.className = 'gbtn gvisit';
-      btn.target = '_blank';
-      btn.rel = 'noopener noreferrer';
-      btn.setAttribute('aria-label', 'Visit Live Site');
-      btn.innerHTML = '<i class="bi bi-box-arrow-up-right"></i>';
-      container.appendChild(btn);
-    }
-  });
-  glightbox.on('slide_changed', function (data) {
-    updateVisitButton(data.current && data.current.trigger);
-  });
 
-  /**
-   * Isotope portfolio filtering
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+    function renderFrame(item) {
+      frameEl.innerHTML = '';
 
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function () {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
+      const backdrop = document.createElement('img');
+      backdrop.className = 'gallery-backdrop';
+      backdrop.alt = '';
+      backdrop.setAttribute('aria-hidden', 'true');
+      backdrop.src = item.type === 'video' ? item.poster : item.src;
+      frameEl.appendChild(backdrop);
+
+      let media;
+      if (item.type === 'video') {
+        media = document.createElement('video');
+        media.className = 'gallery-media';
+        media.src = item.src;
+        media.poster = item.poster;
+        media.autoplay = true;
+        media.loop = true;
+        media.muted = true;
+        media.playsInline = true;
+      } else {
+        media = document.createElement('img');
+        media.className = 'gallery-media';
+        media.src = item.src;
+        media.alt = item.title;
+      }
+      frameEl.appendChild(media);
+
+      const zoomBtn = document.createElement('button');
+      zoomBtn.type = 'button';
+      zoomBtn.className = 'gallery-zoom';
+      zoomBtn.setAttribute('aria-label', 'View full size');
+      zoomBtn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
+      zoomBtn.addEventListener('click', () => {
+        if (window.GLightbox) {
+          GLightbox({
+            elements: [{ href: item.src, type: item.type, title: item.title }]
+          }).open();
+        }
       });
-    });
+      frameEl.appendChild(zoomBtn);
+    }
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function (filterEl) {
-      filterEl.addEventListener('click', function () {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({ filter: this.getAttribute('data-filter') });
-        if (typeof aosInit === 'function') aosInit();
-      }, false);
-    });
-  });
+    function renderCaption(item, list) {
+      categoryEl.textContent = CATEGORY_LABEL[item.category] || item.category;
+      titleEl.textContent = item.title;
+      descEl.textContent = item.description;
+      if (item.liveUrl) {
+        ctaEl.href = item.liveUrl;
+        ctaEl.style.visibility = 'visible';
+      } else {
+        ctaEl.removeAttribute('href');
+        ctaEl.style.visibility = 'hidden';
+      }
+      counterEl.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(list.length).padStart(2, '0');
+    }
+
+    function renderThumbsAndDots(list) {
+      thumbsEl.innerHTML = '';
+      dotsEl.innerHTML = '';
+      list.forEach((item, i) => {
+        const thumb = document.createElement('button');
+        thumb.type = 'button';
+        thumb.className = 'gallery-thumb' + (i === index ? ' active' : '');
+        thumb.setAttribute('aria-label', 'Jump to ' + item.title);
+        const img = document.createElement('img');
+        img.src = item.type === 'video' ? item.poster : item.src;
+        img.alt = '';
+        img.loading = 'lazy';
+        thumb.appendChild(img);
+        thumb.addEventListener('click', () => goTo(i, true));
+        thumbsEl.appendChild(thumb);
+
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'gallery-dot' + (i === index ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsEl.appendChild(dot);
+      });
+    }
+
+    function updateActiveThumbDot() {
+      thumbsEl.querySelectorAll('.gallery-thumb').forEach((el, i) => el.classList.toggle('active', i === index));
+      dotsEl.querySelectorAll('.gallery-dot').forEach((el, i) => el.classList.toggle('active', i === index));
+      const activeThumb = thumbsEl.children[index];
+      if (activeThumb && thumbsEl.scrollWidth > thumbsEl.clientWidth) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    function render(rebuildThumbs) {
+      const list = filteredItems();
+      if (!list.length) return;
+      if (index >= list.length) index = 0;
+      const item = list[index];
+      renderFrame(item);
+      renderCaption(item, list);
+      if (rebuildThumbs) {
+        renderThumbsAndDots(list);
+      } else {
+        updateActiveThumbDot();
+      }
+    }
+
+    function restartTimer() {
+      if (timer) clearTimeout(timer);
+      if (paused) return;
+      timer = setTimeout(() => {
+        index = (index + 1) % filteredItems().length;
+        render(false);
+        restartTimer();
+      }, AUTO_ADVANCE_MS);
+    }
+
+    function goTo(i, manual) {
+      const list = filteredItems();
+      index = ((i % list.length) + list.length) % list.length;
+      render(false);
+      if (manual) restartTimer();
+    }
+
+    function next() { goTo(index + 1, true); }
+    function prev() { goTo(index - 1, true); }
+
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+    if (nextBtn) nextBtn.addEventListener('click', next);
+
+    if (stageEl) {
+      stageEl.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        paused = true;
+        if (timer) clearTimeout(timer);
+      });
+      stageEl.addEventListener('pointerleave', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        paused = false;
+        restartTimer();
+      });
+    }
+
+    if (filtersEl) {
+      filtersEl.querySelectorAll('li').forEach((li) => {
+        li.addEventListener('click', function () {
+          filtersEl.querySelector('.filter-active')?.classList.remove('filter-active');
+          this.classList.add('filter-active');
+          category = this.getAttribute('data-filter');
+          index = 0;
+          render(true);
+          restartTimer();
+        });
+      });
+    }
+
+    render(true);
+    restartTimer();
+  })();
 
   /**
    * Smooth-scroll correction for URLs containing hash links on load
