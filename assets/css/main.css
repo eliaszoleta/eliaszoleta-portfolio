@@ -1294,6 +1294,39 @@ ul {
   gap: 10px;
 }
 
+.skill-group-title {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.skill-group-title.skill-list-title {
+  text-align: left;
+}
+
+.skill-pills.skill-list {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.skill-list .skill-pill {
+  display: list-item;
+  list-style: disc;
+  list-style-position: inside;
+  margin-left: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  text-align: left;
+}
+
+.skill-list .skill-pill:hover {
+  background: none;
+  transform: none;
+}
+
 .skill-pill {
   display: inline-flex;
   align-items: center;
