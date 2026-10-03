@@ -1294,12 +1294,6 @@ ul {
   gap: 10px;
 }
 
-.skill-group-title {
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
 .skill-pill {
   display: inline-flex;
   align-items: center;
