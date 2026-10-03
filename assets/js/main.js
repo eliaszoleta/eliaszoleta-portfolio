@@ -216,9 +216,17 @@
     function updateActiveThumbDot() {
       thumbsEl.querySelectorAll('.gallery-thumb').forEach((el, i) => el.classList.toggle('active', i === index));
       dotsEl.querySelectorAll('.gallery-dot').forEach((el, i) => el.classList.toggle('active', i === index));
+      // Scroll only the thumbnail strip itself (never the page) to keep
+      // the active thumbnail visible. scrollIntoView() is unsafe here:
+      // if the strip isn't on screen yet (e.g. the gallery auto-advances
+      // before the visitor has scrolled down to it), the browser drags
+      // the whole page down to reveal it.
       const activeThumb = thumbsEl.children[index];
       if (activeThumb && thumbsEl.scrollWidth > thumbsEl.clientWidth) {
-        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        thumbsEl.scrollTo({
+          left: activeThumb.offsetLeft - (thumbsEl.clientWidth - activeThumb.clientWidth) / 2,
+          behavior: 'smooth'
+        });
       }
     }
 
