@@ -7,16 +7,16 @@
 # Design Tokens
 --------------------------------------------------------------*/
 :root {
-  --bg: #08080c;
-  --bg-elevated: #0d0d14;
-  --surface: #12121b;
-  --surface-2: #171722;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  --bg: #14151c;
+  --bg-elevated: #1b1d26;
+  --surface: #21232f;
+  --surface-2: #2a2d3b;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
 
   --text: #f5f5f7;
-  --text-secondary: #a3a3b0;
-  --text-muted: #6e6e7d;
+  --text-secondary: #b0b0bd;
+  --text-muted: #80808f;
 
   --accent: #6c7bff;
   --accent-2: #38d9ff;
@@ -266,7 +266,7 @@ ul {
 }
 
 #header.header-scrolled {
-  background: rgba(8, 8, 12, 0.75);
+  background: rgba(20, 21, 28, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom-color: var(--border);
@@ -974,7 +974,7 @@ ul {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(8, 8, 12, 0.6);
+  background: rgba(20, 21, 28, 0.65);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border-strong);
   display: flex;
@@ -996,7 +996,7 @@ ul {
   z-index: 2;
   bottom: 14px;
   right: 14px;
-  background: rgba(8, 8, 12, 0.6);
+  background: rgba(20, 21, 28, 0.65);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border-strong);
   color: var(--text-secondary);
