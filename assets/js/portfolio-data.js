@@ -262,5 +262,23 @@ window.PORTFOLIO_ITEMS = [
     title: 'Book GHL Appointment with Retell AI',
     description: 'Looks up or creates the contact, then books the GHL appointment and responds to Retell',
     liveUrl: null
+  },
+  {
+    id: 'n8n-appointment-booker',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-appointment-booker.png',
+    title: 'Appointment Booker',
+    description: 'Webhook-driven booking flow — creates the contact, formats the date, and books the slot via GHL',
+    liveUrl: null
+  },
+  {
+    id: 'n8n-custom-ghl-mcp-med-spa',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-custom-ghl-mcp-med-spa.png',
+    title: 'Custom GHL MCP — Med Spa Template',
+    description: 'Custom MCP server exposing GHL calendar tools — get slots, book, get, and delete appointments',
+    liveUrl: null
   }
 ];
