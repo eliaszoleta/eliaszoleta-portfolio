@@ -1,7 +1,7 @@
 /**
  * Portfolio data — single source of truth for the Portfolio gallery.
  * Each item: { id, category, type ('image'|'video'), src, poster, title, description, liveUrl }
- * categories: ghlworks | aiprojects | ghlclaude | lovable | socialmedia
+ * categories: ghlworks | aiprojects | ghlclaude | lovable | socialmedia | n8n
  */
 window.PORTFOLIO_CATEGORIES = [
   { key: 'all', label: 'All' },
@@ -9,7 +9,8 @@ window.PORTFOLIO_CATEGORIES = [
   { key: 'aiprojects', label: 'AI Projects' },
   { key: 'ghlclaude', label: 'GHL+Claude' },
   { key: 'lovable', label: 'Lovable' },
-  { key: 'socialmedia', label: 'Social Media' }
+  { key: 'socialmedia', label: 'Social Media' },
+  { key: 'n8n', label: 'n8N' }
 ];
 
 window.PORTFOLIO_ITEMS = [
@@ -215,6 +216,51 @@ window.PORTFOLIO_ITEMS = [
     src: 'assets/img/portfolio/social-fb-ad-whiteglove-form-step2.png',
     title: 'Facebook Lead Form — Contact Info',
     description: 'Lead form step 2 — contact details capture',
+    liveUrl: null
+  },
+  {
+    id: 'n8n-ai-cold-caller-initialiser',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-ai-cold-caller-initialiser.png',
+    title: 'AI Cold Caller Initialiser',
+    description: 'n8n workflow that pulls Airtable records and triggers Retell AI cold calls',
+    liveUrl: null
+  },
+  {
+    id: 'n8n-sms-appointment-setter-ghl',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-sms-appointment-setter-ghl.png',
+    title: 'SMS Appointment Setter (GHL)',
+    description: 'AI agent with memory and knowledge base that books appointments over SMS',
+    liveUrl: null
+  },
+  {
+    id: 'n8n-voice-ai-receptionist',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-voice-ai-receptionist.png',
+    title: 'n8n Ultimate — Voice AI Receptionist',
+    description: 'Full voice AI receptionist flow — contact lookup, slot search, booking, cancel/reschedule',
+    liveUrl: null
+  },
+  {
+    id: 'n8n-check-ghl-calendar-avail',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-check-ghl-calendar-avail.png',
+    title: 'Check GHL Calendar Availability',
+    description: 'Webhook that checks Go High Level calendar slots and returns open times',
+    liveUrl: null
+  },
+  {
+    id: 'n8n-book-ghl-appointment-retell-ai',
+    category: 'n8n',
+    type: 'image',
+    src: 'assets/img/portfolio/n8n-book-ghl-appointment-retell-ai.png',
+    title: 'Book GHL Appointment with Retell AI',
+    description: 'Looks up or creates the contact, then books the GHL appointment and responds to Retell',
     liveUrl: null
   }
 ];
