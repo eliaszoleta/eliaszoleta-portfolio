@@ -34,19 +34,19 @@
     <div class="header-inner">
       <a href="#hero" class="logo">
         <span class="logo-mark">EZ</span>
-        <span>Elias Zoleta</span>
+        <span data-edit="header.brandName">Elias Zoleta</span>
       </a>
 
       <nav id="navmenu">
-        <a href="#hero" class="active">Home</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
+        <a href="#hero" class="active" data-edit="nav.home">Home</a>
+        <a href="#services" data-edit="nav.services">Services</a>
+        <a href="#portfolio" data-edit="nav.portfolio">Portfolio</a>
+        <a href="#resume" data-edit="nav.resume">Resume</a>
+        <a href="#contact" data-edit="nav.contact">Contact</a>
       </nav>
 
       <div class="header-actions">
-        <a href="#contact" class="btn btn-primary btn-sm">Let's Talk</a>
+        <a href="#contact" class="btn btn-primary btn-sm" data-edit="header.cta">Let's Talk</a>
         <button class="header-toggle" aria-label="Toggle menu"><i class="bi bi-list"></i></button>
       </div>
     </div>
@@ -178,19 +178,19 @@
     <section id="portfolio" class="section">
       <div class="container">
         <div class="section-head centered" data-aos="fade-up">
-          <div class="eyebrow" style="justify-content:center">Selected Work</div>
-          <h2>Portfolio</h2>
-          <p>Real GHL automations and AI-built web apps — feel free to test the live sites.</p>
+          <div class="eyebrow" style="justify-content:center" data-edit="portfolio.eyebrow">Selected Work</div>
+          <h2 data-edit="portfolio.heading">Portfolio</h2>
+          <p data-edit="portfolio.subheading">Real GHL automations and AI-built web apps — feel free to test the live sites.</p>
         </div>
 
         <ul class="portfolio-filters centered" id="portfolioFilters" data-aos="fade-up" data-aos-delay="100">
-          <li data-filter="all" class="filter-active">All</li>
-          <li data-filter="ghlworks">GHL Workflows</li>
-          <li data-filter="aiprojects">AI Projects</li>
-          <li data-filter="ghlclaude">GHL+Claude</li>
-          <li data-filter="lovable">Lovable</li>
-          <li data-filter="socialmedia">Social Media</li>
-          <li data-filter="n8n">n8N</li>
+          <li data-filter="all" class="filter-active" data-edit="portfolio.filter.all">All</li>
+          <li data-filter="ghlworks" data-edit="portfolio.filter.ghlworks">GHL Workflows</li>
+          <li data-filter="aiprojects" data-edit="portfolio.filter.aiprojects">AI Projects</li>
+          <li data-filter="ghlclaude" data-edit="portfolio.filter.ghlclaude">GHL+Claude</li>
+          <li data-filter="lovable" data-edit="portfolio.filter.lovable">Lovable</li>
+          <li data-filter="socialmedia" data-edit="portfolio.filter.socialmedia">Social Media</li>
+          <li data-filter="n8n" data-edit="portfolio.filter.n8n">n8N</li>
         </ul>
 
         <div class="gallery" id="portfolioGallery" data-aos="fade-up" data-aos-delay="150">
@@ -241,9 +241,9 @@
               <div class="name" data-edit="resume.summary.name">Elias Zoleta</div>
               <p class="bio" data-edit="resume.summary.bio">I worked as a virtual assistant at a performance marketing agency based in Canada 2022. A year later, I landed a job at a cleaning company based in Las Vegas (Immaculate Restoration) as a GHL manager that lasted 3 years.</p>
               <ul class="resume-contact-list">
-                <li><i class="bi bi-telephone"></i> 09157720944</li>
-                <li><i class="bi bi-envelope"></i> eliaszoleta87@gmail.com</li>
-                <li><i class="bi bi-linkedin"></i> linkedin.com/in/elias-zoleta-a42341210</li>
+                <li><i class="bi bi-telephone"></i> <span data-edit="resume.summary.phone">09157720944</span></li>
+                <li><i class="bi bi-envelope"></i> <span data-edit="resume.summary.email">eliaszoleta87@gmail.com</span></li>
+                <li><i class="bi bi-linkedin"></i> <span data-edit="resume.summary.linkedin">linkedin.com/in/elias-zoleta-a42341210</span></li>
               </ul>
               <a href="https://docs.google.com/document/d/1gJResYFnYjtbxqINZoSCTU9yinKOCk6sVWAr3aPj8SQ/export?format=pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">View Full Resume (PDF)</a>
             </div>
@@ -437,14 +437,14 @@
 
   <footer id="footer">
     <div class="container">
-      <a href="#hero" class="logo"><span class="logo-mark">EZ</span><span>Elias Zoleta</span></a>
+      <a href="#hero" class="logo"><span class="logo-mark">EZ</span><span data-edit="footer.brandName">Elias Zoleta</span></a>
       <p data-edit="footer.tagline">Automation &amp; AI App Builder — GHL Specialist, AI chatbots, voice AI agents, and full-stack apps built with Claude.</p>
       <div class="footer-socials">
         <a href="https://www.linkedin.com/in/elias-zoleta-a42341210/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
         <a href="mailto:eliaszoleta87@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
         <a href="tel:09157720944" aria-label="Phone"><i class="bi bi-telephone"></i></a>
       </div>
-      <div class="footer-copyright">&copy; 2026 Elias Zoleta. All rights reserved.</div>
+      <div class="footer-copyright" data-edit="footer.copyright">&copy; 2026 Elias Zoleta. All rights reserved.</div>
     </div>
   </footer>
 
