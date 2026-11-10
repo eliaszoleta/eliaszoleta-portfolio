@@ -41,12 +41,14 @@
   const toolbar = document.createElement("div");
   toolbar.id = "siteEditToolbar";
   toolbar.innerHTML = `
-    <span class="set-label"><i class="bi bi-pencil-fill"></i> Edit mode &mdash; click any underlined text to edit it</span>
-    <span class="set-status" id="siteEditStatus"></span>
-    <button type="button" class="set-btn set-save" id="siteEditSave">Save Changes</button>
-    <button type="button" class="set-btn set-discard" id="siteEditDiscard">Discard</button>
-    <button type="button" class="set-btn set-exit" id="siteEditExit">Exit</button>
-    <button type="button" class="set-link" id="siteEditForget">Forget token</button>
+    <div class="set-row">
+      <span class="set-label"><i class="bi bi-pencil-fill"></i> Edit mode &mdash; click any underlined text to edit it</span>
+      <button type="button" class="set-btn set-save" id="siteEditSave">Save Changes</button>
+      <button type="button" class="set-btn set-discard" id="siteEditDiscard">Discard</button>
+      <button type="button" class="set-btn set-exit" id="siteEditExit">Exit</button>
+      <button type="button" class="set-link" id="siteEditForget">Forget token</button>
+    </div>
+    <div class="set-status" id="siteEditStatus"></div>
   `;
   document.body.appendChild(toolbar);
 
@@ -125,8 +127,17 @@
       if (!res.ok) return { valid: false, message: "Unexpected error checking the token (" + res.status + ")." };
       const data = await res.json();
       if (!data.permissions || !data.permissions.push) {
-        return { valid: false, message: "This token can read the repo but not write to it. Set Contents permission to Read and write." };
+        return {
+          valid: false,
+          message:
+            "Your GitHub account has write access, but this check can't fully confirm the TOKEN itself was granted it. " +
+            "Make sure the token's Contents permission is set to Read and write, then try again."
+        };
       }
+      // Note: this only confirms you (the account) can push to the repo --
+      // it can't fully confirm this specific fine-grained token's own
+      // Contents permission. If Save still fails with a permission error,
+      // the token itself needs Contents: Read and write.
       return { valid: true };
     } catch (e) {
       return { valid: false, message: "Network error reaching GitHub. Check your connection and try again." };
@@ -295,7 +306,7 @@
         { headers: { Authorization: `token ${token}`, Accept: "application/vnd.github+json" } }
       );
       if (!getRes.ok) {
-        setStatus(describeError(getRes.status, "fetching the live file"), "error");
+        setStatus(await describeError(getRes, "fetching the live file"), "error");
         saveBtn.disabled = false;
         return;
       }
@@ -334,7 +345,7 @@
       });
 
       if (!putRes.ok) {
-        setStatus(describeError(putRes.status, "saving"), "error");
+        setStatus(await describeError(putRes, "saving"), "error");
         saveBtn.disabled = false;
         return;
       }
@@ -350,11 +361,34 @@
     }
   });
 
-  function describeError(status, action) {
-    if (status === 401) return "Token rejected while " + action + ". It may have expired.";
-    if (status === 403) return "Not allowed to write to this repo with that token.";
-    if (status === 409) return "The file changed on GitHub since you loaded this page. Reload and try again.";
-    if (status === 422) return "GitHub rejected the request (422). Try reloading the page.";
-    return "Error " + status + " while " + action + ".";
+  async function describeError(res, action) {
+    const status = res.status;
+    let ghMessage = "";
+    try {
+      const body = await res.json();
+      if (body && body.message) ghMessage = body.message;
+    } catch (e) {
+      /* response had no JSON body */
+    }
+    const suffix = ghMessage ? ' GitHub said: "' + ghMessage + '"' : "";
+
+    if (status === 401) return "Token rejected while " + action + ". It may have expired." + suffix;
+    if (status === 403) {
+      return (
+        "GitHub blocked the write (403) while " +
+        action +
+        ". This almost always means the token's Contents permission isn't set " +
+        "to Read and write -- go to github.com/settings/tokens, open this token, and check " +
+        "(or re-grant) Contents: Read and write for " +
+        OWNER +
+        "/" +
+        REPO +
+        "." +
+        suffix
+      );
+    }
+    if (status === 409) return "The file changed on GitHub since you loaded this page. Reload and try again." + suffix;
+    if (status === 422) return "GitHub rejected the request (422). Try reloading the page." + suffix;
+    return "Error " + status + " while " + action + "." + suffix;
   }
 })();
